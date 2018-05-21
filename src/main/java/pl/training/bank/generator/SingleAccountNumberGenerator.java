@@ -1,18 +1,12 @@
 package pl.training.bank.generator;
 
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Generator(type = "single")
 //@Service
-@NoArgsConstructor
-@RequiredArgsConstructor
 public class SingleAccountNumberGenerator implements AccountNumberGenerator {
 
-    @NonNull
-    private String accountNumber;
+    private String accountNumber = "00000000000000000000000001";
 
     @Override
     public String getNext() {
