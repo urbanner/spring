@@ -8,7 +8,6 @@ import pl.training.bank.account.AccountRepository;
 import pl.training.bank.operation.Operation;
 import pl.training.bank.operation.UnknownOperationException;
 
-import java.util.Arrays;
 import java.util.Map;
 
 @Service
@@ -17,10 +16,6 @@ public class DispositionService {
 
     private AccountRepository accountRepository;
     private Map<String, Operation> operations;
-
-    public void process(Disposition... dispositions) {
-        Arrays.stream(dispositions).forEach(this::process);
-    }
 
     public void process(Disposition disposition) {
         Account account = getAccount(disposition.getAccountNumber());
