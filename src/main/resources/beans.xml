@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="accountNumberGenerator" class="pl.training.bank.generator.IncrementalAccountNumberGenerator"/>
+
+    <bean id="accountRepository" class="pl.training.bank.account.HashMapAccountRepository"/>
+
+    <bean id="accountService" class="pl.training.bank.account.AccountService" init-method="init" destroy-method="destroy" scope="prototype">
+        <constructor-arg name="accountNumberGenerator" ref="accountNumberGenerator"/>
+        <constructor-arg name="accountRepository" ref="accountRepository"/>
+    </bean>
+
+    <bean id="dispositionService" class="pl.training.bank.disposition.DispositionService">
+        <constructor-arg name="accountRepository" ref="accountRepository"/>
+        <constructor-arg name="operations">
+            <map>
+                <entry key="deposit" value-ref="deposit"/>
+                <entry key="withdraw" value-ref="withdraw"/>
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <bean id="deposit" class="pl.training.bank.operation.DepositOperation"/>
+
+    <bean id="withdraw" class="pl.training.bank.operation.WithdrawOperation"/>
+
+    <bean class="pl.training.bank.common.BeanLoggerPostProcessor"/>
+
+</beans>

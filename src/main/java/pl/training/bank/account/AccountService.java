@@ -1,9 +1,11 @@
 package pl.training.bank.account;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.java.Log;
 import pl.training.bank.common.ResultPage;
 import pl.training.bank.generator.AccountNumberGenerator;
 
+@Log
 @AllArgsConstructor
 public class AccountService {
 
@@ -18,6 +20,14 @@ public class AccountService {
 
     public ResultPage<Account> getAccounts(int pageNumber, int pageSize) {
         return accountRepository.get(pageNumber, pageSize);
+    }
+
+    public void init() {
+        log.info("### Initializing: " + getClass().getSimpleName());
+    }
+
+    public void destroy() {
+        log.info("### Closing: " + getClass().getSimpleName());
     }
 
 }
