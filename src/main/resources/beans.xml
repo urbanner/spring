@@ -39,8 +39,8 @@
             <aop:around method="logExecutionTime" pointcut="@annotation(pl.training.bank.common.ExecutionTime)"/>
         </aop:aspect>
         <aop:aspect ref="operationLogger">
-            <aop:pointcut id="process" expression="execution(void pl.training.bank.disposition.DispositionService.process(pl.training.bank.disposition.Disposition))"/>
-            <aop:before method="onStart" pointcut="execution(void pl.training.bank.disposition.DispositionService.process(pl.training.bank.disposition.Disposition)) and args(disposition)"/>
+            <aop:pointcut id="process" expression="execution(void pl.training.bank.disposition.DispositionService.process(..))"/>
+            <aop:before method="onStart" pointcut="execution(void pl.training.bank.disposition.DispositionService.process(..)) and args(disposition)"/>
             <aop:after-returning method="onSuccess" pointcut-ref="process"/>
             <aop:after-throwing method="onException" pointcut-ref="process" throwing="ex"/>
         </aop:aspect>
