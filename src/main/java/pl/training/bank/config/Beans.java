@@ -3,20 +3,24 @@ package pl.training.bank.config;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Scope;
 import pl.training.bank.account.AccountRepository;
 import pl.training.bank.account.AccountService;
 import pl.training.bank.account.HashMapAccountRepository;
 import pl.training.bank.common.BeanLoggerPostProcessor;
+import pl.training.bank.common.Profiler;
 import pl.training.bank.disposition.DispositionService;
 import pl.training.bank.generator.AccountNumberGenerator;
 import pl.training.bank.generator.IncrementalAccountNumberGenerator;
+import pl.training.bank.operation.ConsoleOperationLogger;
 import pl.training.bank.operation.DepositOperation;
 import pl.training.bank.operation.Operation;
 import pl.training.bank.operation.WithdrawOperation;
 
 import java.util.Map;
 
+@EnableAspectJAutoProxy
 @Configuration
 public class Beans {
 
@@ -54,6 +58,16 @@ public class Beans {
     @Bean
     public BeanLoggerPostProcessor beanLogger() {
         return new BeanLoggerPostProcessor();
+    }
+
+    @Bean
+    public Profiler profiler() {
+        return new Profiler();
+    }
+
+    @Bean
+    public ConsoleOperationLogger operationLogger() {
+        return new ConsoleOperationLogger();
     }
 
 }
