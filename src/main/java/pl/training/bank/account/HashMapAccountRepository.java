@@ -1,5 +1,6 @@
 package pl.training.bank.account;
 
+import org.springframework.stereotype.Repository;
 import pl.training.bank.common.ResultPage;
 
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@Repository("accountRepository")
 public class HashMapAccountRepository implements AccountRepository {
 
     private Map<String, Account> accounts = new HashMap<>();
