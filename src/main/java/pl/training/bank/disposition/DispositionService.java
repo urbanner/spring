@@ -4,10 +4,10 @@ import lombok.AllArgsConstructor;
 import pl.training.bank.account.Account;
 import pl.training.bank.account.AccountNotFoundException;
 import pl.training.bank.account.AccountRepository;
+import pl.training.bank.common.ExecutionTime;
 import pl.training.bank.operation.Operation;
 import pl.training.bank.operation.UnknownOperationException;
 
-import java.util.Arrays;
 import java.util.Map;
 
 @AllArgsConstructor
@@ -16,10 +16,7 @@ public class DispositionService {
     private AccountRepository accountRepository;
     private Map<String, Operation> operations;
 
-    public void process(Disposition... dispositions) {
-        Arrays.stream(dispositions).forEach(this::process);
-    }
-
+    @ExecutionTime
     public void process(Disposition disposition) {
         Account account = getAccount(disposition.getAccountNumber());
         Operation operation = getOperation(disposition.getOperationName());
