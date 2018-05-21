@@ -1,11 +1,10 @@
-package pl.training.bank.operation;
+package pl.training.bank.disposition;
 
 import org.aspectj.lang.annotation.*;
 import pl.training.bank.BankException;
-import pl.training.bank.disposition.Disposition;
 
 @Aspect
-public class ConsoleOperationLogger {
+public class ConsoleDispositionLogger {
 
     private static final String SEPARATOR = "##################################################################################################";
 
@@ -13,7 +12,7 @@ public class ConsoleOperationLogger {
     public void process() {
     }
 
-    @Before("pl.training.bank.operation.ConsoleOperationLogger.process() && args(disposition)")
+    @Before("pl.training.bank.disposition.ConsoleDispositionLogger.process() && args(disposition)")
     public void onStart(Disposition disposition) {
         System.out.format("%s\n%s\n", SEPARATOR, disposition);
     }
