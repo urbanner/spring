@@ -1,9 +1,8 @@
-package pl.training.bank.operation;
+package pl.training.bank.disposition;
 
 import pl.training.bank.BankException;
-import pl.training.bank.disposition.Disposition;
 
-public class ConsoleOperationLogger {
+public class ConsoleDispositionLogger {
 
     private static final String SEPARATOR = "##################################################################################################";
 

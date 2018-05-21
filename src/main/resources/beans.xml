@@ -7,7 +7,7 @@
 
     <bean id="accountRepository" class="pl.training.bank.account.HashMapAccountRepository"/>
 
-    <bean id="accountService" class="pl.training.bank.account.AccountService" init-method="init" destroy-method="destroy" scope="prototype">
+    <bean id="accountService" class="pl.training.bank.account.AccountService" init-method="init" destroy-method="destroy">
         <constructor-arg name="accountNumberGenerator" ref="accountNumberGenerator"/>
         <constructor-arg name="accountRepository" ref="accountRepository"/>
     </bean>
@@ -31,14 +31,14 @@
     <aop:aspectj-autoproxy/>
 
     <bean id="profiler" class="pl.training.bank.common.Profiler"/>
-    <bean id="operationLogger" class="pl.training.bank.operation.ConsoleOperationLogger"/>
+    <bean id="dispositionLogger" class="pl.training.bank.disposition.ConsoleDispositionLogger"/>
 
     <aop:config>
         <aop:aspect ref="profiler">
             <!--<aop:around method="logExecutionTime" pointcut="bean(dispositionService)"/>-->
             <aop:around method="logExecutionTime" pointcut="@annotation(pl.training.bank.common.ExecutionTime)"/>
         </aop:aspect>
-        <aop:aspect ref="operationLogger">
+        <aop:aspect ref="dispositionLogger">
             <aop:pointcut id="process" expression="execution(void pl.training.bank.disposition.DispositionService.process(..))"/>
             <aop:before method="onStart" pointcut="execution(void pl.training.bank.disposition.DispositionService.process(..)) and args(disposition)"/>
             <aop:after-returning method="onSuccess" pointcut-ref="process"/>

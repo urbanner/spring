@@ -1,13 +1,8 @@
 package pl.training.bank.generator;
 
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 public class SingleAccountNumberGenerator implements AccountNumberGenerator {
 
-    @NonNull
-    private String accountNumber;
+    private String accountNumber = "00000000000000000000000001";
 
     @Override
     public String getNext() {
