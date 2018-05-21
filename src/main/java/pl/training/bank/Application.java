@@ -28,10 +28,8 @@ public class Application {
         DispositionService dispositionService = new DispositionService(accountRepository, operations);
 
         Account account = accountService.createAccount();
-        dispositionService.process(
-                new Disposition(account.getNumber(), 10_000, "deposit"),
-                new Disposition(account.getNumber(), 5_000, "withdraw")
-        );
+        dispositionService.process(new Disposition(account.getNumber(), 10_000, "deposit"));
+        dispositionService.process(new Disposition(account.getNumber(), 5_000, "withdraw"));
         System.out.println(accountService.getAccounts(0,10).getData());
     }
 
