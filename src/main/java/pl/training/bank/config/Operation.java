@@ -6,6 +6,8 @@ import pl.training.bank.operation.DepositOperation;
 import pl.training.bank.operation.LargeDepositListener;
 import pl.training.bank.operation.LargeDepositLogger;
 import pl.training.bank.operation.WithdrawOperation;
+import pl.training.bank.operation.history.OperationHistoryLogger;
+import pl.training.bank.operation.history.OperationHistoryRepository;
 
 @Configuration
 public class Operation {
@@ -28,6 +30,11 @@ public class Operation {
     @Bean
     public LargeDepositListener largeDepositListener() {
         return new LargeDepositListener();
+    }
+
+    @Bean
+    public OperationHistoryLogger operationHistoryLogger(OperationHistoryRepository operationHistoryRepository) {
+        return new OperationHistoryLogger(operationHistoryRepository);
     }
 
 }
