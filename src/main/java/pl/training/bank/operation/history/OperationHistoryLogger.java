@@ -23,7 +23,7 @@ public class OperationHistoryLogger {
     @AfterReturning("execution(void pl.training.bank.disposition.DispositionService.process(..)) && args(disposition)")
     public void logOperation(Disposition disposition) {
         Account account = getAccount(disposition.getAccountNumber());
-        OperationHistoryEntry historyEntry = createOperationHistoryEntry(disposition, account);
+        OperationHistoryEntry historyEntry = createHistoryEntry(disposition, account);
         operationHistoryRepository.save(historyEntry);
     }
 
@@ -32,7 +32,7 @@ public class OperationHistoryLogger {
                 .orElseThrow(AccountNotFoundException::new);
     }
 
-    private OperationHistoryEntry createOperationHistoryEntry(Disposition disposition, Account account) {
+    private OperationHistoryEntry createHistoryEntry(Disposition disposition, Account account) {
         OperationHistoryEntry historyEntry = new OperationHistoryEntry();
         historyEntry.setAccount(account);
         historyEntry.setDate(new Date());
