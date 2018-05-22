@@ -2,6 +2,7 @@ package pl.training.bank.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import pl.training.bank.account.AccountRepository;
 import pl.training.bank.operation.DepositOperation;
 import pl.training.bank.operation.LargeDepositListener;
 import pl.training.bank.operation.LargeDepositLogger;
@@ -33,8 +34,8 @@ public class Operation {
     }
 
     @Bean
-    public OperationHistoryLogger operationHistoryLogger(OperationHistoryRepository operationHistoryRepository) {
-        return new OperationHistoryLogger(operationHistoryRepository);
+    public OperationHistoryLogger operationHistoryLogger(OperationHistoryRepository operationHistoryRepository, AccountRepository accountRepository) {
+        return new OperationHistoryLogger(operationHistoryRepository, accountRepository);
     }
 
 }
