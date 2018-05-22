@@ -1,18 +1,27 @@
 package pl.training.bank.config;
 
 import com.zaxxer.hikari.HikariDataSource;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.*;
 import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.context.event.SimpleApplicationEventMulticaster;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import pl.training.bank.common.BeanLoggerPostProcessor;
 import pl.training.bank.common.ContextListener;
 import pl.training.bank.common.Profiler;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
+@EnableTransactionManagement
 @PropertySource("classpath:jdbc.properties")
 @Import({Account.class, Disposition.class, Operation.class})
 @EnableAspectJAutoProxy
@@ -53,6 +62,27 @@ public class Bank {
         SimpleApplicationEventMulticaster multicaster = new SimpleApplicationEventMulticaster();
         multicaster.setTaskExecutor(new SimpleAsyncTaskExecutor());
         return multicaster;
+    }
+
+    @Bean
+    public PropertiesFactoryBean hibernateProperties() {
+        PropertiesFactoryBean factoryBean = new PropertiesFactoryBean();
+        factoryBean.setLocation(new ClassPathResource("hibernate.properties"));
+        return factoryBean;
+    }
+
+    @Bean
+    public LocalSessionFactoryBean sessionFactory(DataSource dataSource, Properties hibernateProperties) {
+        LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+        sessionFactoryBean.setDataSource(dataSource);
+        sessionFactoryBean.setHibernateProperties(hibernateProperties);
+        sessionFactoryBean.setPackagesToScan("pl.training.bank");
+        return sessionFactoryBean;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
+        return new HibernateTransactionManager(sessionFactory);
     }
 
 }
