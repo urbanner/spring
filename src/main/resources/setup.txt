@@ -1,0 +1,3 @@
+create database bank;
+\c bank;
+create table account (id serial, account_number varchar(26), balance bigint);
