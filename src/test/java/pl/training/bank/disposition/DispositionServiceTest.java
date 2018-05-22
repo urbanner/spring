@@ -58,7 +58,7 @@ class DispositionServiceTest {
     void shouldUpdateAccount() {
         DispositionService dispositionService = new DispositionService(accountRepository, operations);
         dispositionService.process(disposition);
-        verify(accountRepository).update(account);
+        verify(accountRepository).save(account);
     }
 
 }

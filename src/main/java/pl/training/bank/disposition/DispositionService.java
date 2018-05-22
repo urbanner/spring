@@ -23,7 +23,7 @@ public class DispositionService {
         Account account = getAccount(disposition.getAccountNumber());
         Operation operation = getOperation(disposition.getOperationName());
         operation.execute(account, disposition.getFunds());
-        accountRepository.update(account);
+        accountRepository.save(account);
     }
 
     private Account getAccount(String accountNumber) {

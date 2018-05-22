@@ -3,6 +3,9 @@ package pl.training.bank.account;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import pl.training.bank.common.ResultPage;
 import pl.training.bank.generator.AccountNumberGenerator;
 
@@ -26,7 +29,8 @@ class AccountServiceTest {
     void setUp() {
         when(accountNumberGenerator.getNext()).thenReturn(ACCOUNT_NUMBER);
         when(accountRepository.save(any(Account.class))).then(returnsFirstArg());
-        when(accountRepository.get(anyInt(), anyInt())).thenReturn(resultPage);
+        when(accountRepository.findAll(PageRequest.of(0, 1))).thenReturn(new PageImpl<>(new ArrayList<>()));
+        resultPage.setTotalPages(1);
     }
 
     @DisplayName("Should save created account")

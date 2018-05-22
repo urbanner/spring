@@ -10,6 +10,7 @@ import org.springframework.context.event.SimpleApplicationEventMulticaster;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -22,6 +23,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+@EnableJpaRepositories(basePackages = "pl.training.bank")
 @EnableTransactionManagement
 @PropertySource("classpath:jdbc.properties")
 @Import({Account.class, Disposition.class, Operation.class})
