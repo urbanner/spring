@@ -30,7 +30,7 @@ public class Application {
         Account account = accountService.createAccount();
         dispositionService.process(new Disposition(account.getNumber(), 10_000, "deposit"));
         dispositionService.process(new Disposition(account.getNumber(), 5_000, "withdraw"));
-        System.out.println(accountService.getAccounts(0,10).getData());
+        accountService.getAccounts(0, 10).getData().forEach(System.out::println);
     }
 
 }
