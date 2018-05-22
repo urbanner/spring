@@ -5,16 +5,20 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@NamedQueries({
+        @NamedQuery(name = Account.SELECT_ACCOUNT_BY_NUMBER, query = "select a from Account a where a.number = :number"),
+        @NamedQuery(name = Account.SELECT_ACCOUNTS, query = "select a from Account a")
+})
 @Entity
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Data
 public class Account {
+
+    public static final String SELECT_ACCOUNT_BY_NUMBER = "selectAccountByNumber";
+    public static final String SELECT_ACCOUNTS = "selectAccounts";
 
     @GeneratedValue
     @Id
