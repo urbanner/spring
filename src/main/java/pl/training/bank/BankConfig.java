@@ -1,4 +1,4 @@
-package pl.training.bank.config;
+package pl.training.bank;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
@@ -15,9 +15,12 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import pl.training.bank.account.AccountConfig;
 import pl.training.bank.common.BeanLoggerPostProcessor;
 import pl.training.bank.common.ContextListener;
 import pl.training.bank.common.Profiler;
+import pl.training.bank.disposition.DispositionConfig;
+import pl.training.bank.operation.OperationConfig;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -26,10 +29,10 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = "pl.training.bank")
 @EnableTransactionManagement
 @PropertySource("classpath:jdbc.properties")
-@Import({Account.class, Disposition.class, Operation.class})
+@Import({AccountConfig.class, DispositionConfig.class, OperationConfig.class})
 @EnableAspectJAutoProxy
 @Configuration
-public class Bank {
+public class BankConfig {
 
     @Autowired
     private Environment environment;

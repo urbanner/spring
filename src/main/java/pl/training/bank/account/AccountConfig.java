@@ -1,4 +1,4 @@
-package pl.training.bank.config;
+package pl.training.bank.account;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,7 @@ import pl.training.bank.generator.JpaIncrementalAccountNumberGenerator;
 import javax.persistence.EntityManagerFactory;
 
 @Configuration
-public class Account {
+public class AccountConfig {
 
     @Bean
     public AccountNumberGenerator accountNumberGenerator(EntityManagerFactory entityManagerFactory) {
