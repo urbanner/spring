@@ -1,4 +1,4 @@
-package pl.training.bank.config;
+package pl.training.bank.operation;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,7 @@ import pl.training.bank.operation.LargeDepositLogger;
 import pl.training.bank.operation.WithdrawOperation;
 
 @Configuration
-public class Operation {
+public class OperationConfig {
 
     @Bean
     public DepositOperation deposit() {

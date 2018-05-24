@@ -1,4 +1,4 @@
-package pl.training.bank.config;
+package pl.training.bank.disposition;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,7 @@ import pl.training.bank.operation.Operation;
 import java.util.Map;
 
 @Configuration
-public class Disposition {
+public class DispositionConfig {
 
     @Bean
     public DispositionService dispositionService(AccountRepository accountRepository, Map<String, Operation> operations) {
