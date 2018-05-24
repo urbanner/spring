@@ -1,4 +1,4 @@
-package pl.training.bank.config;
+package pl.training.bank;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
