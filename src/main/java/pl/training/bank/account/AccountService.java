@@ -35,4 +35,9 @@ public class AccountService {
         log.info("### Closing: " + getClass().getSimpleName());
     }
 
+    public Account getById(Long id) {
+        return accountRepository.getById(id)
+                .orElseThrow(AccountNotFoundException::new);
+    }
+
 }

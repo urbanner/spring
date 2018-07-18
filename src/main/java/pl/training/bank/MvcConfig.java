@@ -9,6 +9,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import pl.training.bank.common.mapper.Mapper;
+import pl.training.bank.common.mapper.ModelMapperAdapter;
 
 @ComponentScan(basePackages = "pl.training.bank")
 @EnableWebMvc
@@ -32,6 +34,11 @@ public class MvcConfig implements WebMvcConfigurer {
         viewResolver.setPrefix("/WEB-INF/views/");
         viewResolver.setSuffix(".jsp");
         return viewResolver;
+    }
+
+    @Bean
+    public Mapper mapper() {
+        return new ModelMapperAdapter();
     }
 
 }
