@@ -1,23 +1,23 @@
 package pl.training.bank.disposition;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import pl.training.bank.account.Account;
-import pl.training.bank.account.AccountNotFoundException;
-import pl.training.bank.account.AccountRepository;
-import pl.training.bank.operation.Operation;
-import pl.training.bank.operation.UnknownOperationException;
+import org.junit.Before;
+import org.junit.Test;
+import pl.training.bank.account.entity.Account;
+import pl.training.bank.account.services.AccountNotFoundException;
+import pl.training.bank.account.repository.AccountRepository;
+import pl.training.bank.disposition.entity.Disposition;
+import pl.training.bank.disposition.service.DispositionService;
+import pl.training.bank.operation.entity.Operation;
+import pl.training.bank.operation.service.UnknownOperationException;
 
 import java.util.Map;
 import java.util.Optional;
 
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.singletonMap;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-class DispositionServiceTest {
+public class DispositionServiceTest {
 
     private Operation operation = mock(Operation.class);
     private Disposition disposition = new Disposition("00000000000000000000000001", 10_000, "deposit");
@@ -25,37 +25,33 @@ class DispositionServiceTest {
     private Account account = mock(Account.class);
     private AccountRepository accountRepository = mock(AccountRepository.class);
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         when(accountRepository.getByNumber(anyString())).thenReturn(Optional.of(account));
     }
 
-    @DisplayName("Should throw exception when account not found")
-    @Test
-    void shouldThrowExceptionWhenAccountNotFound() {
+    @Test(expected = AccountNotFoundException.class)
+    public void shouldThrowExceptionWhenAccountNotFound() {
         DispositionService dispositionService = new DispositionService(mock(AccountRepository.class), operations);
-        assertThrows(AccountNotFoundException.class, () -> dispositionService.process(disposition));
+        dispositionService.process(disposition);
     }
 
-    @DisplayName("Should throw exception when operation is unknown")
-    @Test
-    void shouldThrowExceptionWhenOperationIsUnknown() {
+    @Test(expected = UnknownOperationException.class)
+    public void shouldThrowExceptionWhenOperationIsUnknown() {
         DispositionService dispositionService = new DispositionService(accountRepository, emptyMap());
-        assertThrows(UnknownOperationException.class, () -> dispositionService.process(disposition));
+        dispositionService.process(disposition);
     }
 
-    @DisplayName("Should execute operation")
     @Test
-    void shouldExecuteOperation() {
+    public void shouldExecuteOperation() {
         DispositionService dispositionService = new DispositionService(accountRepository, operations);
         dispositionService.process(disposition);
         verify(operation).execute(account, disposition.getFunds());
     }
 
 
-    @DisplayName("Should update account")
     @Test
-    void shouldUpdateAccount() {
+    public void shouldUpdateAccount() {
         DispositionService dispositionService = new DispositionService(accountRepository, operations);
         dispositionService.process(disposition);
         verify(accountRepository).save(account);

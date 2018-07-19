@@ -7,7 +7,8 @@ import org.springframework.context.event.SimpleApplicationEventMulticaster;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import pl.training.bank.common.BeanLoggerPostProcessor;
 import pl.training.bank.common.ContextListener;
-import pl.training.bank.common.Profiler;
+import pl.training.bank.common.aop.Profiler;
+
 @Configuration
 public class BankConfig {
 

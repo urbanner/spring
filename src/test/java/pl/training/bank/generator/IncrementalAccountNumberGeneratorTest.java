@@ -1,27 +1,25 @@
 package pl.training.bank.generator;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import pl.training.bank.generator.service.IncrementalAccountNumberGenerator;
 
 import static java.lang.Integer.parseInt;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-class IncrementalAccountNumberGeneratorTest {
+public class IncrementalAccountNumberGeneratorTest {
 
     private static final String ACCOUNT_NUMBER_FORMAT = "\\d{26}";
 
     private IncrementalAccountNumberGenerator accountNumberGenerator = new IncrementalAccountNumberGenerator();
 
-    @DisplayName("Should generate valid account number ")
     @Test
-    void shouldGenerateValidAccountNumber() {
+    public void shouldGenerateValidAccountNumber() {
         assertTrue(accountNumberGenerator.getNext().matches(ACCOUNT_NUMBER_FORMAT));
     }
 
-    @DisplayName("Should generate a new account number increasing the previous one")
     @Test
-    void shouldGenerateNewAccountNumberIncreasingPreviousOne() {
+    public void shouldGenerateNewAccountNumberIncreasingPreviousOne() {
         String initialAccountNumber = accountNumberGenerator.getNext();
         assertEquals(parseInt(initialAccountNumber) + 1, parseInt(accountNumberGenerator.getNext()));
     }

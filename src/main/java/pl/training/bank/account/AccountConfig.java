@@ -2,10 +2,10 @@ package pl.training.bank.account;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pl.training.bank.account.AccountRepository;
-import pl.training.bank.account.AccountService;
-import pl.training.bank.generator.AccountNumberGenerator;
-import pl.training.bank.generator.JpaIncrementalAccountNumberGenerator;
+import pl.training.bank.account.repository.AccountRepository;
+import pl.training.bank.account.services.AccountService;
+import pl.training.bank.generator.service.AccountNumberGenerator;
+import pl.training.bank.generator.service.JpaIncrementalAccountNumberGenerator;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -17,7 +17,7 @@ public class AccountConfig {
         return new JpaIncrementalAccountNumberGenerator(entityManagerFactory);
     }
 
-    @Bean(initMethod = "init", destroyMethod = "destroy")
+    @Bean
     public AccountService accountService(AccountNumberGenerator accountNumberGenerator, AccountRepository accountRepository) {
         return new AccountService(accountNumberGenerator, accountRepository);
     }

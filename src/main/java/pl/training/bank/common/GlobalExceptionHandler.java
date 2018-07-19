@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import pl.training.bank.account.AccountNotFoundException;
+import pl.training.bank.account.services.AccountNotFoundException;
 import pl.training.bank.common.dto.ExceptionDto;
 
 import java.util.Locale;

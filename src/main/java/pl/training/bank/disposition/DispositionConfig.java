@@ -2,10 +2,10 @@ package pl.training.bank.disposition;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pl.training.bank.account.AccountRepository;
-import pl.training.bank.disposition.ConsoleDispositionLogger;
-import pl.training.bank.disposition.DispositionService;
-import pl.training.bank.operation.Operation;
+import pl.training.bank.account.repository.AccountRepository;
+import pl.training.bank.disposition.aop.ConsoleDispositionLogger;
+import pl.training.bank.disposition.service.DispositionService;
+import pl.training.bank.operation.entity.Operation;
 
 import java.util.Map;
 

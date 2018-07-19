@@ -2,13 +2,13 @@ package pl.training.bank.operation;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pl.training.bank.account.AccountRepository;
-import pl.training.bank.operation.DepositOperation;
-import pl.training.bank.operation.LargeDepositListener;
-import pl.training.bank.operation.LargeDepositLogger;
-import pl.training.bank.operation.WithdrawOperation;
-import pl.training.bank.operation.history.OperationHistoryLogger;
-import pl.training.bank.operation.history.OperationHistoryRepository;
+import pl.training.bank.account.repository.AccountRepository;
+import pl.training.bank.operation.service.DepositOperation;
+import pl.training.bank.operation.event.LargeDepositListener;
+import pl.training.bank.operation.aop.LargeDepositLogger;
+import pl.training.bank.operation.service.WithdrawOperation;
+import pl.training.bank.operation.aop.OperationHistoryLogger;
+import pl.training.bank.operation.service.OperationHistoryRepository;
 
 @Configuration
 public class OperationConfig {
