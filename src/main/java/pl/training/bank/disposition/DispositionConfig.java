@@ -7,6 +7,7 @@ import pl.training.bank.disposition.ConsoleDispositionLogger;
 import pl.training.bank.disposition.DispositionService;
 import pl.training.bank.operation.Operation;
 
+import javax.persistence.EntityManager;
 import java.util.Map;
 
 @Configuration

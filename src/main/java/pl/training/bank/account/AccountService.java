@@ -2,9 +2,11 @@ package pl.training.bank.account;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
+import org.springframework.transaction.annotation.Transactional;
 import pl.training.bank.common.ResultPage;
 import pl.training.bank.generator.AccountNumberGenerator;
 
+@Transactional
 @Log
 @AllArgsConstructor
 public class AccountService {
