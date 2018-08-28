@@ -2,9 +2,13 @@ package pl.training.bank.account;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
+import org.springframework.transaction.annotation.Transactional;
 import pl.training.bank.common.ResultPage;
 import pl.training.bank.generator.AccountNumberGenerator;
 
+import java.util.Optional;
+
+@Transactional
 @Log
 @AllArgsConstructor
 public class AccountService {
@@ -30,4 +34,7 @@ public class AccountService {
         log.info("### Closing: " + getClass().getSimpleName());
     }
 
+    public Optional<Account> getByNumber(String accountNumber) {
+        return accountRepository.getByNumber(accountNumber);
+    }
 }
