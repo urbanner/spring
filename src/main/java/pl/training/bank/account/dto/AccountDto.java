@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Data
 public class AccountDto {
 
+    private long id;
     private String number;
     private long balance;
 

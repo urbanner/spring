@@ -12,6 +12,8 @@ import pl.training.bank.common.UriBuilder;
 import pl.training.bank.common.aop.ResultPage;
 import pl.training.bank.common.dto.PageDto;
 import pl.training.bank.common.mapper.Mapper;
+import pl.training.bank.customer.entity.Customer;
+import pl.training.bank.customer.services.CustomerService;
 
 import java.net.URI;
 import java.util.List;
@@ -30,9 +32,13 @@ public class AccountController {
     private AccountService accountService;
     private UriBuilder uriBuilder = new UriBuilder();
 
+    @NonNull
+    private CustomerService customerService;
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity createAccount() {
         Account account = accountService.createAccount();
+        Customer customer = customerService.createCustomer(new Customer());
         URI uri = uriBuilder.requestUriWithId(account.getId());
         return ResponseEntity.created(uri).body(mapper.map(account, AccountDto.class));
     }

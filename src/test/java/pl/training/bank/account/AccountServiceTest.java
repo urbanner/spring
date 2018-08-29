@@ -11,6 +11,7 @@ import pl.training.bank.common.aop.ResultPage;
 import pl.training.bank.generator.service.AccountNumberGenerator;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
@@ -29,6 +30,7 @@ public class AccountServiceTest {
     @Before
     public void setUp() {
         when(accountNumberGenerator.getNext()).thenReturn(ACCOUNT_NUMBER);
+        when(accountRepository.getById(anyLong())).thenReturn(Optional.of(new Account()));
         when(accountRepository.save(any(Account.class))).then(returnsFirstArg());
         when(accountRepository.findAll(PageRequest.of(0, 1))).thenReturn(new PageImpl<>(new ArrayList<>()));
         resultPage.setTotalPages(1);
@@ -51,4 +53,10 @@ public class AccountServiceTest {
         assertEquals(resultPage, accountService.getAccounts(0, 1));
     }
 
+
+    @Test
+    public void shouldDeleteAccount(){
+        accountService.deleteAccount(1L);
+        verify(accountRepository).delete(any(Account.class));
+    }
 }
