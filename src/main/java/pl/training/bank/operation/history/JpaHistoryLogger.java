@@ -27,7 +27,7 @@ public class JpaHistoryLogger {
     }
 
     private void addEntry(Account account, Disposition disposition) {
-        historyRepository.addEntry(new HistoryEntry.HistoryEntryBuilder()
+        historyRepository.save(new HistoryEntry.HistoryEntryBuilder()
                 .account(account)
                 .operationName(disposition.getOperationName())
                 .funds(disposition.getFunds())

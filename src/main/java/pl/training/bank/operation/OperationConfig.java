@@ -34,11 +34,6 @@ public class OperationConfig {
     }
 
     @Bean
-    public HistoryRepository historyRepository() {
-        return new HistoryRepository();
-    }
-
-    @Bean
     public JpaHistoryLogger jpaHistoryLogger(HistoryRepository historyRepository, AccountService accountService) {
         return new JpaHistoryLogger(historyRepository, accountService);
     }
